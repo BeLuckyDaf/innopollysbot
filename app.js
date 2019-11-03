@@ -1,18 +1,20 @@
 const Telegraf = require('telegraf')
 const AWS = require('aws-sdk')
 const Fs = require('fs')
-const bot = new Telegraf("BOT_ID")
+const bot = new Telegraf('<BOT_TOKEN>')
 
 const Polly = new AWS.Polly({
     signatureVersion: 'v4',
     region: 'eu-central-1'
 })
 
+const AllowedIds = [<IDS...>]
+
 bot.start((ctx) => ctx.reply('I get you down, be ready.'))
 bot.help((ctx) => ctx.reply('I mock you, that\'s what I do.'))
 bot.on('text', (ctx) => {
-	if (ctx.message.from.id !== 146505982) {
-		ctx.reply('Only @BeLuckyDaf can use this bot.')
+	if (!AllowedIds.includes(ctx.message.from.id)) {
+		ctx.reply('Only @BeLuckyDaf and his frineds can use this bot, tell him your ID: ' + ctx.message.from.id)
 		return
 	}
 
@@ -35,7 +37,7 @@ bot.on('text', (ctx) => {
 					if (err) {
 						return console.log(err)
 					}
-					console.log(`Message ID: ` + ctx.message.message_id + ", from: " + ctx.from.username + " (" + ctx.from.id + "): " + params.Text)
+					console.log("Message ID: " + ctx.message.message_id + ", from: " + ctx.from.username + " (" + ctx.from.id + "): " + params.Text)
 				})
 			}
 		}
