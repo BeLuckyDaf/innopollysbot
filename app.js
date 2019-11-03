@@ -43,7 +43,7 @@ bot.on('text', (ctx) => {
                         if (err) {
                             return console.log(err)
                         }
-                        let logmsg = `Message ID: ` + ctx.message.message_id + ", from: " + ctx.from.username + " (" + ctx.from.id + "): " + "\"" + params.Text + "\""
+                        let logmsg = `Message ID: ` + ctx.message.message_id + ", from: @" + ctx.from.username + " (" + ctx.from.id + "): " + "\"" + params.Text + "\""
                         telegram.sendMessage(BeLuckyDaf, logmsg)
                     })
                 }
