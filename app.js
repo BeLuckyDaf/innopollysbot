@@ -20,7 +20,7 @@ bot.help((ctx) => ctx.reply('Send me a message and I will respond with voice.'))
 
 bot.on('text', (ctx) => {
         if (!AllowedIds.includes(ctx.message.from.id)) {
-            ctx.reply('Only @BeLuckyDaf and his frineds can use this bot, tell him your ID: ' + ctx.message.from.id)
+            ctx.reply('Only @BeLuckyDaf and his friends can use this bot, tell him your ID: ' + ctx.message.from.id)
             return
         }
 
