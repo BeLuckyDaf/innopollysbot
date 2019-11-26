@@ -11,7 +11,7 @@ const Polly = new AWS.Polly({
     region: 'eu-central-1'
 })
 
-const AllowedIds = [146505982, <IDs>...]
+const AllowedIds = [146505982, IDS...]
 const BeLuckyDaf = 146505982 
 
 SelfAllowed = []
@@ -33,7 +33,7 @@ bot.command('access', (ctx) => {
     }
 
     let command = ctx.message.text.split(/[ ]+/)
-    if (command.length < 2) ctx.reply('Do you agree with the rules? [y/n]')
+    if (command.length < 2) ctx.reply('Do you agree with the rules? Type \'/access [y/Y] to agree.\'')
     else {
         if (command[1] === 'y' || command[1] === 'Y') {
             AllowedIds.push(ctx.message.from.id)
@@ -129,6 +129,10 @@ bot.on('text', (ctx) => {
         'Text': ctx.message.text,
         'OutputFormat': 'mp3',
         'VoiceId': 'Joanna'
+    }
+
+    if (/^[\u0400-\u04FF .,?!\-0-9\(\)_\[\]\+=]+$/.test(ctx.message.text)) {
+        params.VoiceId = 'Maxim'
     }
 
     Polly.synthesizeSpeech(params, (err, data) => {
